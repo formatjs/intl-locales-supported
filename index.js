@@ -33,7 +33,11 @@ function areIntlLocalesSupported(locales) {
     }
 
     return intlConstructors.every(function (intlConstructor) {
-        var supportedLocales = intlConstructor.supportedLocalesOf(locales);
-        return supportedLocales.length === locales.length;
+        try {
+            var supportedLocales = intlConstructor.supportedLocalesOf(locales);
+            return supportedLocales.length === locales.length;
+        } catch(e) {
+            return false
+        }
     });
 }
